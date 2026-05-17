@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work | Kewshith Sheron</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .filter-menu {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color var(--transition-speed);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: var(--accent-color);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .work-item.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .work-card {
+      position: relative;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-self: start;
+    }
+
+    .work-card .media-wrapper {
+      border: none;
+      height: 400px;
+    }
+
+    .work-card.full-width .media-wrapper {
+      height: 500px;
+    }
+
+    .work-info {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      /* 16:9 Aspect Ratio */
+      height: 0;
+    }
+
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+
+    /* Filtering Logic */
+    #f-all:checked~.filter-menu label[for="f-all"],
+    #f-3d:checked~.filter-menu label[for="f-3d"],
+    #f-graphic:checked~.filter-menu label[for="f-graphic"],
+    #f-hard:checked~.filter-menu label[for="f-hard"],
+    #f-cinema:checked~.filter-menu label[for="f-cinema"] {
+      color: var(--accent-color);
+    }
+
+    #f-3d:checked~.work-grid .work-item:not(.item-3d),
+    #f-graphic:checked~.work-grid .work-item:not(.item-graphic),
+    #f-hard:checked~.work-grid .work-item:not(.item-hard),
+    #f-cinema:checked~.work-grid .work-item:not(.item-cinema) {
+      display: none;
+    }
+
+    /* Game Cards Hover Effect */
+    .game-card {
+      position: relative;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+
+    .game-card .media-wrapper {
+      aspect-ratio: 1 / 1;
+      height: auto;
+      border: none;
+    }
+
+    .item-hard.game-card .media-wrapper,
+    .item-cinema.game-card .media-wrapper {
+      aspect-ratio: 16 / 9;
+    }
+
+    .bg-img-wrapper {
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 100%;
+      transform: scale(1.15);
+      /* Start zoomed in */
+      background-color: var(--card-bg);
+      /* Background for contain */
+    }
+
+    .bg-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+
+    .game-card:hover .bg-img-wrapper {
+      transform: scale(1);
+      /* Zoom out on hover */
+    }
+
+    .game-card:hover .bg-img-wrapper img {
+      object-fit: contain;
+      /* Show full image without cropping */
+    }
+
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 255, 204, 0.8);
+      color: var(--bg-color, #0b0c10);
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 15;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .play-btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: rgba(0, 255, 204, 1);
+    }
+
+    /* SVG Animated Border */
+    .border-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .border-svg rect {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: var(--accent-color);
+      stroke-width: 4px;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      transition: stroke-dashoffset 0.6s ease-in-out;
+    }
+
+    .game-card:hover .border-svg rect {
+      stroke-dashoffset: 0;
+    }
+
+    /* Overlay Card at the Bottom */
+    .game-hover-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(21, 24, 29, 0.4);
+      /* High transparency */
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      padding: 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      pointer-events: none;
+      z-index: 5;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .game-card:hover .game-hover-content {
+      transform: translateY(0);
+    }
+
+    .game-hover-content .card-tag {
+      color: var(--accent-color);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-main);
+    }
+
+    .game-hover-content .card-title {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span>&#9632;</span> KEWSHITH SHERON
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html" class="active">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-btn">Hire Me</a>
+  </header>
+
+  <main>
+    <div style="margin-bottom: 4rem;">
+      <span class="subtitle">&#9679; PROJECTS</span>
+      <h1 class="section-title">MY WORKS</h1>
+      <p style="font-size: 1.2rem; max-width: 700px;">Exploring the intersection of brutalist architecture and digital
+        precision. A collection of high-fidelity environments, procedural systems, and cinematic graphic explorations.
+      </p>
+    </div>
+
+    <input type="radio" name="filter" id="f-all" checked hidden>
+    <input type="radio" name="filter" id="f-3d" hidden>
+    <input type="radio" name="filter" id="f-graphic" hidden>
+    <input type="radio" name="filter" id="f-hard" hidden>
+    <input type="radio" name="filter" id="f-cinema" hidden>
+
+    <div class="filter-menu">
+      <label for="f-all" class="filter-btn">All projects</label>
+      <label for="f-3d" class="filter-btn">3D Models</label>
+      <label for="f-graphic" class="filter-btn">Graphics</label>
+      <label for="f-hard" class="filter-btn">Games</label>
+      <label for="f-cinema" class="filter-btn">Cinemotography</label>
+    </div>
+
+    <div class="work-grid">
+      <!-- 3D Project Items -->
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/bike.jpeg" alt="BIKE">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Cyberpunk Motorcycle</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/bus m.jpeg" alt="BUS M">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Abandoned Bus</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/game box.jpeg" alt="GAME BOX">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Arcade Cabinet</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/japan mask.jpeg" alt="JAPAN MASK">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Japanese Oni Mask</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/library.jpeg" alt="LIBRARY">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">LAlchemist Shop</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/robo 1 .png" alt="ROBO 1">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Compact Robot</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/robo arm.jpeg" alt="ROBO ARM">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Robotic Arm</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/room.jpeg" alt="ROOM">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Gamer Bedroom</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-3d game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/3D projects/staff.jpeg" alt="STAFF">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">BLENDER</span>
+          <h3 class="card-title">Magic Staff</h3>
+        </div>
+      </div>
+
+      <!-- Cinematography Items -->
+      <div class="work-card work-item item-cinema game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-c1"
+          style="background-image: url('https://img.youtube.com/vi/3igrKkrsMgM/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-c1', '3igrKkrsMgM')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">CINEMATOGRAPHY</span>
+          <h3 class="card-title">Silent Weight (2026) | Psychological Short Film</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-cinema game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-c2"
+          style="background-image: url('https://img.youtube.com/vi/mu2_jvHXcnU/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-c2', 'mu2_jvHXcnU')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">CINEMATOGRAPHY</span>
+          <h3 class="card-title">This Boy Can’t Control His Tics | Cinematic Short Film</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-cinema game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-c3"
+          style="background-image: url('https://img.youtube.com/vi/cqDu0VbGa_E/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-c3', 'cqDu0VbGa_E')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">CINEMATOGRAPHY</span>
+          <h3 class="card-title">කොල්ලෙක් | Kollek | Sinhala Cinematic Short Film</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-cinema game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-c4"
+          style="background-image: url('https://img.youtube.com/vi/1igqVnaJ2So/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-c4', '1igqVnaJ2So')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">CINEMATOGRAPHY</span>
+          <h3 class="card-title">කොල්ලෙක් 2 | Kollek 2 | Sinhala Cinematic Short Film</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-cinema game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-c5"
+          style="background-image: url('https://img.youtube.com/vi/oChKcf77_wg/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-c5', 'oChKcf77_wg')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">CINEMATOGRAPHY</span>
+          <h3 class="card-title">මම | MAMA | Sinhala Cinematic Short Film</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-cinema game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-c6"
+          style="background-image: url('https://img.youtube.com/vi/9li3N_uR_Js/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-c6', '9li3N_uR_Js')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">CINEMATOGRAPHY</span>
+          <h3 class="card-title">GEM HEIST | 3D Animated Short Film</h3>
+        </div>
+      </div>
+
+      <!-- Grid Items -->
+
+
+      <!-- Graphic Design Items -->
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/422289782_3474151536228477_5471196921613212775_n.jpg" alt="FACEBOOK POST">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">FACEBOOK POST</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/Juice_Bottle_v01.jpg" alt="JUICE BOTTLE">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">JUICE BOTTLE</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/RETRO FORCE basic logo.png" alt="RETRO FORCE LOGO">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">RETRO FORCE LOGO</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/awrudusale.jpg" alt="AWRUDU SALE">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">AWRUDU SALE</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/coffee.jpeg" alt="COFFEE">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">Coffee Shop Graphic</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/event poster.jpg" alt="EVENT POSTER">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">EVENT POSTER</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/logo.jpg" alt="LOGO">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">LOGO</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/m1.jpeg" alt="M1">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">Red Horror Film Poster</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/m2.jpeg" alt="M2">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">Dark Haunted House Poster</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/m4.jpeg" alt="M4">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">Retro Anime Poster</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/m5.jpeg" alt="M5">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">Neon Noir Thriller Poster</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/vffg.jpg" alt="VFFG">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">Juice Label Layout</h3>
+        </div>
+      </div>
+
+      <div class="work-card work-item item-graphic game-card">
+        <div class="media-wrapper bg-img-wrapper">
+          <img src="assets/graphic design/watch.jpeg" alt="WATCH">
+        </div>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GRAPHIC DESIGN</span>
+          <h3 class="card-title">Luxury Chronograph Watch</h3>
+        </div>
+      </div>
+
+
+
+      <!-- Game Card 1 -->
+      <div class="work-card work-item item-hard game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-1"
+          style="background-image: url('https://img.youtube.com/vi/dj5MkrqK4U4/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-1', 'dj5MkrqK4U4')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">GAMEPLAY PROTOTYPE</span>
+          <h3 class="card-title">OSPACE QUEST Gameplay (4K) | Explore the Galaxy</h3>
+        </div>
+      </div>
+
+      <!-- Game Card 2 -->
+      <div class="work-card work-item item-hard game-card">
+        <div class="media-wrapper bg-img-wrapper" id="video-wrapper-2"
+          style="background-image: url('https://img.youtube.com/vi/q9J7yCSDRew/maxresdefault.jpg');"></div>
+        <button class="play-btn" onclick="playVideo('video-wrapper-2', 'q9J7yCSDRew')">▶</button>
+        <svg class="border-svg" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" pathLength="100" />
+        </svg>
+        <div class="game-hover-content">
+          <span class="card-tag">VISUAL EFFECTS</span>
+          <h3 class="card-title">I Created My Own 2D Platformer Game</h3>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="logo" style="font-size: 1rem;">
+      KEWSHITH SHERON<br>
+      <span
+        style="font-size: 0.6rem; color: var(--text-secondary); font-family: var(--font-mono); display: block; margin-top: 0.5rem; font-weight: normal;">&copy;2024
+        KEWSHITH SHERON | ALL RIGHTS RESERVED</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">TERMS OF SERVICE</a>
+      <a href="#">PRIVACY ENCRYPTION</a>
+      <a href="#">SYSTEM STATUS</a>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox-modal">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Popup Image">
+    <div id="lightbox-video-container"
+      style="display: none; width: 80%; max-width: 1000px; aspect-ratio: 16/9; background: #000; position: relative;">
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const modal = document.getElementById("lightbox");
+      const modalImg = document.getElementById("lightbox-img");
+      const videoContainer = document.getElementById("lightbox-video-container");
+      const closeBtn = document.querySelector(".lightbox-close");
+
+      // Select all work images
+      const images = document.querySelectorAll(".media-wrapper img");
+
+      images.forEach(img => {
+        img.addEventListener("click", () => {
+          modalImg.src = img.src;
+          modalImg.style.display = "block";
+          videoContainer.style.display = "none";
+          videoContainer.innerHTML = ""; // Clear video
+          modal.classList.add("show");
+        });
+      });
+
+      function closeModal() {
+        modal.classList.remove("show");
+        videoContainer.innerHTML = ""; // Stop video playback
+        setTimeout(() => {
+          modalImg.src = "";
+        }, 300);
+      }
+
+      // Close modal on close button click
+      closeBtn.addEventListener("click", closeModal);
+
+      // Close modal when clicking outside the image/video
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    });
+
+    function playVideo(wrapperId, videoId) {
+      const modal = document.getElementById("lightbox");
+      const modalImg = document.getElementById("lightbox-img");
+      const videoContainer = document.getElementById("lightbox-video-container");
+
+      modalImg.style.display = "none";
+      videoContainer.style.display = "block";
+      videoContainer.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+      modal.classList.add("show");
+    }
+  </script>
+</body>
+
+</html>

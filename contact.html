@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Kewshith Sheron</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      border: 1px solid var(--border-color);
+      margin-bottom: 4rem;
+    }
+
+    .contact-info {
+      padding: 4rem;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(11, 12, 16, 1) 0%, rgba(26, 29, 36, 0.5) 100%);
+    }
+
+    .contact-info::after {
+      content: '010101';
+      position: absolute;
+      top: -5rem;
+      right: -2rem;
+      font-size: 15rem;
+      font-weight: 800;
+      color: rgba(0, 255, 204, 0.03);
+      z-index: 0;
+    }
+
+    .contact-form-container {
+      padding: 4rem;
+      position: relative;
+    }
+
+    .contact-title {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .social-link>span:first-child {
+      color: var(--text-primary);
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+    }
+
+    .social-link:hover {
+      color: var(--accent-color);
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .contact-form-container {
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .social-links {
+        grid-template-columns: 1fr;
+      }
+
+      .social-link {
+        justify-content: center;
+        text-align: left;
+        /* Keep text left-aligned to the icon, but center the block */
+      }
+
+      .contact-info .subtitle {
+        text-align: center;
+      }
+
+      .contact-info>div:first-child p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contact-info>div:last-child {
+        justify-content: center;
+      }
+
+      .contact-title {
+        font-size: 2rem;
+      }
+
+      .contact-form-container form {
+        text-align: left;
+      }
+
+      .form-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+      }
+
+      .contact-info::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span>&#9632;</span> KEWSHITH SHERON
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-btn">Hire Me</a>
+  </header>
+
+  <main>
+    <div class="contact-container">
+      <!-- Info Left Side -->
+      <div class="contact-info">
+        <div>
+          <span class="subtitle">SYSTEM LOCATOR</span>
+          <h1 class="contact-title">PRIMARY<br>FREQUENCIES</h1>
+          <p style="font-size: 1.1rem; max-width: 400px;">Establishing communication links across the digital sprawl.
+            Reach out via encrypted channels or find me in the static.</p>
+
+          <div class="social-links">
+            <a href="https://github.com/Sherozaz" target="_blank" class="social-link">
+              <span>&#10022;</span>
+              <div>GITHUB /<br><span class="text-highlight">github.com/Sherozaz</span></div>
+            </a>
+            <a href="https://www.linkedin.com/in/kewshith-sheron-4759402a5" target="_blank" class="social-link">
+              <span>&#9635;</span>
+              <div>LINKEDIN /<br><span class="text-highlight">Kewshith Sheron</span></div>
+            </a>
+            <a href="https://youtube.com/@Shero_zaz" target="_blank" class="social-link">
+              <span>&#9658;</span>
+              <div>YOUTUBE /<br><span class="text-highlight">youtube.com/@Shero_zaz</span></div>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61552483743456" target="_blank" class="social-link">
+              <span>&#9741;</span>
+              <div>FACEBOOK /<br><span class="text-highlight">Kewshith Sheron</span></div>
+            </a>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem; margin-top: 4rem;">
+          <div
+            style="width: 40px; height: 40px; border: 1px solid var(--accent-color); display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+            <div style="width: 8px; height: 8px; background-color: var(--accent-color); border-radius: 50%;"></div>
+          </div>
+          <div class="mono" style="font-size: 0.75rem;">
+            <span class="text-highlight" id="uptime-display">UPTIME: 99.98%</span><br>
+            CURRENT ZONE: UTC+05:30 (SRI LANKA)
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Right Side -->
+      <div class="contact-form-container">
+        <h2 class="contact-title" style="margin-bottom: 0.5rem;">ENCRYPTED<br>MESSAGE</h2>
+        <span class="mono" style="color: #ff3366; font-size: 0.8rem; display: block; margin-bottom: 3rem;">STATUS:
+          WAITING FOR INPUT</span>
+
+        <form action="mailto:kewshithsheron@example.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label class="form-label">FULL NAME</label>
+            <input type="text" name="Name" class="form-control" placeholder="ENTER YOUR NAME" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">YOUR GMAIL</label>
+            <input type="email" name="Email" class="form-control" placeholder="YOUR EMAIL ADDRESS" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">MESSAGE NOTE</label>
+            <textarea name="Message" class="form-control" rows="4" placeholder="INITIATE MESSAGE SEQUENCE..." required
+              style="resize: none;"></textarea>
+          </div>
+
+          <div class="form-group"
+            style="display: flex; align-items: center; gap: 1rem; margin-bottom: 3rem; margin-top: 2rem;">
+            <input type="checkbox" id="nda" name="NDA"
+              style="accent-color: var(--accent-color); width: 1.2rem; height: 1.2rem; background: transparent; border: 1px solid var(--border-color);">
+            <label for="nda" class="mono" style="font-size: 0.75rem; color: var(--text-primary); cursor: pointer;">I
+              I HAVE READ AND AGREE TO THE TERMS AND CONDITIONS</label>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            TRANSMIT DATA <span>&#9658;</span>
+          </button>
+        </form>
+
+        <div class="form-footer">
+          <span>SECURE CONNECTION: SRI LANKA</span>
+          <span>YOUR ID: #8821</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="logo" style="font-size: 1rem;">
+      KEWSHITH SHERON<br>
+      <span
+        style="font-size: 0.6rem; color: var(--text-secondary); font-family: var(--font-mono); display: block; margin-top: 0.5rem; font-weight: normal;">&copy;2024
+        KEWSHITH SHERON | ALL RIGHTS RESERVED</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">TERMS OF SERVICE</a>
+      <a href="#">PRIVACY ENCRYPTION</a>
+      <a href="#">SYSTEM STATUS</a>
+    </div>
+  </footer>
+
+  <script>
+    function updateUptime() {
+      const uptimeEl = document.getElementById('uptime-display');
+      if (uptimeEl) {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+        uptimeEl.textContent = 'SYSTEM_TIME: ' + timeString;
+      }
+    }
+    setInterval(updateUptime, 1000);
+    updateUptime();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Kewshith Sheron</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .about-header {
+      margin-bottom: 4rem;
+    }
+
+    .timeline {
+      margin-top: 4rem;
+      border-left: 1px solid var(--border-color);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem;
+      top: 0.25rem;
+      width: 10px;
+      height: 10px;
+      background-color: var(--border-color);
+      border-radius: 50%;
+      transition: background-color var(--transition-speed);
+    }
+
+    .timeline-item:hover::before {
+      background-color: var(--accent-color);
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      border: 1px solid var(--accent-color);
+      padding: 0.2rem 0.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+    }
+
+    .profile-card {
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.2);
+      border: 1px solid var(--border-color);
+      transition: filter 0.5s ease, transform 0.5s ease;
+      transform: scale(1.1);
+      /* Zoomed in by default */
+    }
+
+    .profile-img:hover {
+      filter: grayscale(0%) contrast(1.1);
+      transform: scale(1);
+      /* Zoom out on hover */
+    }
+
+    .profile-info h3 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-size: 3rem;
+      color: var(--accent-color);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    .expertise-header {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .skill-name {
+      width: 200px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .progress-bar-bg {
+      flex-grow: 1;
+      height: 8px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: var(--accent-color);
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.1, 0.5, 0.1, 1);
+      transition-delay: 500ms;
+    }
+
+    .skill-percent {
+      width: 40px;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .skill-name {
+        width: 120px;
+        font-size: 0.7rem;
+      }
+
+      .skill-percent {
+        width: 35px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span>&#9632;</span> KEWSHITH SHERON
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-btn">Hire Me</a>
+  </header>
+
+  <main>
+    <div class="grid grid-2">
+      <div>
+        <div class="about-header">
+          <span class="subtitle">MY IDENTITY</span>
+          <h1 class="section-title">CRAFTING THE <span class="text-highlight">DIGITAL</span> FRONTIER.</h1>
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Based at the intersection of technical precision and
+            cinematic storytelling, KEWSHITH SHERON operates as a specialized creative hub for high fidelity interactive
+            experiences.</p>
+          <p style="font-size: 1.1rem;">We don't just build environments; we engineer atmospheric systems. Every pixel
+            is calculated, every light source is intentional, and every interaction is optimized for peak immersion.</p>
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-num">9</span>
+            <span class="stat-label">3D Projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">13</span>
+            <span class="stat-label">Design Assets</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 5rem;">
+          <h2 class="journey-header">
+            MY JOURNEY
+            <span class="mono text-highlight">[2017-2026]</span>
+          </h2>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-date">2025 &mdash; PRESENT</span>
+              <h3 class="timeline-title">CINEMATOGRAPHER</h3>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Directing visual narratives through motion
+                graphics, camera framing, lighting, and cinematic composition.</p>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Managing visual production workflows, crafting
+                detailed shot lists, and ensuring absolute clarity and high-definition visual quality from raw footage
+                to final cut.</p>
+              <p class="timeline-desc">Merges a strong digital editing background with cinematic vision to create
+                compelling video projects.</p>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-date">2023 &mdash; PRESENT</span>
+              <h3 class="timeline-title">FREELANCE 3D MODELER & ANIMATOR</h3>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Translating 2D artistic skills into 3D
+                environments, focusing on hard-surface modeling, asset creation, and character design.</p>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Proficient in Blender, handling poly-modeling,
+                complex animations, and experimenting with unique styles like stop-motion simulation.</p>
+              <p class="timeline-desc">Collaborating with like-minded creatives and studios to deliver high-quality,
+                stylized 3D content.</p>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-date">2021 &mdash; PRESENT</span>
+              <h3 class="timeline-title">GAMING TESTER ON FIVERR</h3>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Top-rated freelance Game Tester on Fiverr,
+                providing comprehensive quality assurance (QA) and structural feedback for various gaming titles.</p>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Experienced in analyzing gameplay mechanics,
+                identifying technical bugs, evaluating user experience (UX), and delivering detailed performance reports
+                to independent developers.</p>
+              <p class="timeline-desc">Deeply familiar with PC hardware optimization, software environments, and
+                advanced game modding.</p>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-date">2017 &mdash; PRESENT</span>
+              <h3 class="timeline-title">GRAPHIC DESIGNER</h3>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Self-Taught & Driven: Built a career from the
+                ground up through rigorous self-directed study, transforming a passion for traditional realism into
+                professional digital design expertise.</p>
+              <p class="timeline-desc" style="margin-bottom: 0.5rem;">Developed a strong eye for composition, anatomy,
+                and lighting by studying masters like Da Vinci and Michelangelo, directly applying those classical
+                principles to modern graphic design.</p>
+              <p class="timeline-desc">Nearly a decade of experience delivering high-quality visual assets, branding,
+                and marketing materials for global clients, mastering industry-standard design tools independently.</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div>
+        <div class="profile-card">
+          <span class="mono text-highlight" style="font-size: 0.7rem;">&bull; MY SELF</span>
+          <div style="overflow: hidden; display: flex; flex-grow: 1;">
+            <img src="assets/Profile Image/pf_image.jpeg" alt="Kewshith Sheron" class="profile-img">
+          </div>
+          <div class="profile-info">
+            <h3>KEWSHITH SHERON</h3>
+            <div
+              style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">
+              <span>Creative Designer</span>
+              <span class="text-highlight">LOCATION: SRI LANKA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 8rem; max-width: 900px; margin-left: auto; margin-right: auto;" class="expertise-section">
+      <h2 class="expertise-header" style="text-align: center;">
+        MY EXPERTISE
+      </h2>
+      <div class="skills-container">
+        <div class="skill-row">
+          <span class="skill-name">UNITY</span>
+          <div class="progress-bar-bg">
+            <div class="progress-fill" data-width="65%"></div>
+          </div>
+          <span class="skill-percent">65%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">UNREAL ENGINE</span>
+          <div class="progress-bar-bg">
+            <div class="progress-fill" data-width="80%"></div>
+          </div>
+          <span class="skill-percent">80%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">BLENDER</span>
+          <div class="progress-bar-bg">
+            <div class="progress-fill" data-width="98%"></div>
+          </div>
+          <span class="skill-percent">98%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">ADOBE COLLECTION</span>
+          <div class="progress-bar-bg">
+            <div class="progress-fill" data-width="90%"></div>
+          </div>
+          <span class="skill-percent">90%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">PROGRAMMING</span>
+          <div class="progress-bar-bg">
+            <div class="progress-fill" data-width="87%"></div>
+          </div>
+          <span class="skill-percent">87%</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="logo" style="font-size: 1rem;">
+      KEWSHITH SHERON<br>
+      <span
+        style="font-size: 0.6rem; color: var(--text-secondary); font-family: var(--font-mono); display: block; margin-top: 0.5rem; font-weight: normal;">&copy;2024
+        KEWSHITH SHERON | ALL RIGHTS RESERVED</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">TERMS OF SERVICE</a>
+      <a href="#">PRIVACY ENCRYPTION</a>
+      <a href="#">SYSTEM STATUS</a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const fills = entry.target.querySelectorAll('.progress-fill');
+            fills.forEach(fill => {
+              fill.style.width = fill.getAttribute('data-width');
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const expertiseSection = document.querySelector('.expertise-section');
+      if (expertiseSection) {
+        observer.observe(expertiseSection);
+      }
+    });
+  </script>
+</body>
+
+</html>

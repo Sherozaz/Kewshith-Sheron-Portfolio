@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Kewshith Sheron</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .workflow-container {
+      margin-top: 6rem;
+    }
+
+    .workflow-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4rem;
+      position: relative;
+    }
+
+    .workflow-steps::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      left: 5%;
+      width: 90%;
+      height: 1px;
+      background-color: var(--border-color);
+      z-index: -1;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 15%;
+    }
+
+    .step-icon {
+      width: 4rem;
+      height: 4rem;
+      background-color: var(--bg-color);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-mono);
+      transition: all var(--transition-speed);
+    }
+
+    .step:hover .step-icon {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      font-weight: bold;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      font-size: 0.8rem;
+    }
+
+    .cta-banner {
+      margin-top: 6rem;
+      background: linear-gradient(90deg, var(--card-bg) 0%, #1a0b1c 100%);
+      border: 1px solid var(--border-color);
+      padding: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cta-btn {
+      border: 1px solid var(--text-secondary);
+      padding: 1rem 2rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition-speed);
+    }
+
+    .cta-btn:hover {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .workflow-steps {
+        flex-direction: column;
+        gap: 3rem;
+        position: relative;
+      }
+
+      .workflow-steps::before {
+        display: block;
+        width: 1px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        background-color: var(--border-color);
+      }
+
+      .step {
+        width: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-banner {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .cta-banner h2 {
+        font-size: 1.8rem !important;
+      }
+
+      .cta-banner .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .cta-banner .btn-primary,
+      .cta-banner .cta-btn {
+        width: 100% !important;
+        font-size: 0.7rem;
+        padding: 1rem;
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span>&#9632;</span> KEWSHITH SHERON
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-btn">Hire Me</a>
+  </header>
+
+  <main>
+    <h1 class="section-title">WHAT I BUILD</h1>
+    <p style="font-size: 1.2rem; max-width: 600px; margin-bottom: 4rem;">Creating high-quality 3D assets, stylized props, and optimized environments for interactive games. I focus on clean 3D modeling, creative world-building, and visual storytelling that brings game concepts to life.
+    </p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div
+          style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2rem;">
+          <span style="font-size: 1.5rem; color: var(--accent-color);">[3D]</span>
+          <span>01</span>
+        </div>
+        <h3 class="card-title">3D Modeling</h3>
+        <p>Hyper-detailed hard-surface and organic modeling optimized for real-time raytracing and cinematic production
+          pipelines.</p>
+        <div class="card-tags">
+          <span class="tag">MAYA</span>
+          <span class="tag">BLENDER</span>
+          <span class="tag">TOPOLOGY</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div
+          style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2rem;">
+          <span style="font-size: 1.5rem; color: var(--accent-color);">[GD]</span>
+          <span>02</span>
+        </div>
+        <h3 class="card-title">Graphic Design</h3>
+        <p>Digital brutalism meets cinematic typography. Identity systems built for technical brands and high-end visual
+          storytelling.</p>
+        <div class="card-tags">
+          <span class="tag">ILLUSTRATOR</span>
+          <span class="tag">PHOTOSHOP</span>
+          <span class="tag">LAYOUT</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div
+          style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2rem;">
+          <span style="font-size: 1.5rem; color: var(--accent-color);">[DEV]</span>
+          <span>03</span>
+        </div>
+        <h3 class="card-title">Game Dev</h3>
+        <p>Full-stack technical execution in Unreal Engine 5. Blueprinting, custom shaders, and immersive interaction
+          design.</p>
+        <div class="card-tags">
+          <span class="tag">UE5</span>
+          <span class="tag">C++</span>
+          <span class="tag">C#</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div
+          style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2rem;">
+          <span style="font-size: 1.5rem; color: var(--accent-color);">[CINE]</span>
+          <span>04</span>
+        </div>
+        <h3 class="card-title">Cinematography</h3>
+        <p>Directing visual narratives through motion graphics, camera framing, lighting, and cinematic composition.</p>
+        <div class="card-tags">
+          <span class="tag">PREMIERE</span>
+          <span class="tag">AFTER EFFECTS</span>
+          <span class="tag">DAVINCI RESOLVE
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="workflow-container">
+      <div class="workflow-header">
+        <div>
+          <span class="subtitle">WORKFLOW PIPELINE</span>
+          <h2>THE PRODUCTION PROCESS</h2>
+        </div>
+        <span class="mono">EFFICIENCY PROTOCOL</span>
+      </div>
+
+      <div class="workflow-steps">
+        <div class="step">
+          <div class="step-icon">01</div>
+          <div class="step-num">01 BRIEF</div>
+          <div class="step-desc">Extraction of requirements and core objectives.</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">02</div>
+          <div class="step-num">02 CONCEPT</div>
+          <div class="step-desc">Iterative exploration of visual directions.</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">03</div>
+          <div class="step-num">03 CREATE</div>
+          <div class="step-desc">High-fidelity production and implementation.</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">04</div>
+          <div class="step-num">04 REVIEW</div>
+          <div class="step-desc">Collaborative validation and refinement.</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">05</div>
+          <div class="step-num">05 DELIVER</div>
+          <div class="step-desc">Deployment of final assets and documentation.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <div>
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">READY TO ARCHITECT YOUR<br>NEXT PROJECT?</h2>
+      </div>
+      <div class="cta-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="contact.html" class="btn-primary" style="width: auto;">INITIALIZE COMMUNICATION</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="logo" style="font-size: 1rem;">
+      KEWSHITH SHERON<br>
+      <span
+        style="font-size: 0.6rem; color: var(--text-secondary); font-family: var(--font-mono); display: block; margin-top: 0.5rem; font-weight: normal;">&copy;2024
+        KEWSHITH SHERON | ALL RIGHTS RESERVED</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">TERMS OF SERVICE</a>
+      <a href="#">PRIVACY ENCRYPTION</a>
+      <a href="#">SYSTEM STATUS</a>
+    </div>
+  </footer>
+
+</body>
+
+</html>

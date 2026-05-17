@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kewshith Sheron | Portfolio</title>
+  <meta name="description" content="Kewshith Sheron Portfolio - Gaming Design and Cinematography">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-section {
+      text-align: center;
+      margin-top: 5vh;
+      margin-bottom: 5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 10vw, 8rem);
+      margin-bottom: 1rem;
+      letter-spacing: -2px;
+    }
+
+    .hero-title span {
+      color: var(--accent-color);
+      display: block;
+    }
+
+    .status-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .skills-ticker {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 0;
+      margin: 4rem 0;
+      font-weight: 800;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      color: var(--text-secondary);
+    }
+
+    .skills-ticker span.highlight {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span>&#9632;</span> KEWSHITH SHERON
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-btn">Hire Me</a>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <span class="subtitle">CREATIVE DESIGNER</span>
+      <h1 class="hero-title">KEWSHITH<br><span>SHERON</span></h1>
+
+      <div class="status-bar">
+        <div class="status-dot"></div>
+        <span>STATUS: ACTIVE</span>
+      </div>
+    </section>
+
+    <div class="skills-ticker">
+      <span class="highlight">UNREAL ENGINE 5</span>
+      <span class="bullet">&#10022;</span>
+      <span>UNITY ENGINE</span>
+      <span class="bullet">&#10022;</span>
+      <span class="highlight">BLENDER</span>
+      <span class="bullet">&#10022;</span>
+      <span>CINEMATOGRAPHY</span>
+    </div>
+
+    <section>
+      <div
+        style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="subtitle">Recent Activities</span>
+          <h2>MY WORKS</h2>
+        </div>
+        <a href="work.html" class="mono text-highlight">VIEW ALL WORK</a>
+      </div>
+
+      <style>
+        .home-projects-grid {
+          display: grid;
+          grid-template-columns: 1.3fr 1fr;
+          gap: 2rem;
+          max-width: 1440px;
+          /* Increased from 1100px to reduce empty side space */
+          margin: 0 auto;
+          /* Centers the grid */
+        }
+
+        .main-project-card {
+          padding: 0 !important;
+          overflow: hidden;
+          display: flex !important;
+          flex-direction: column;
+          height: 100%;
+          align-self: stretch !important;
+        }
+
+        .main-project-img {
+          flex: 1;
+          min-height: 300px;
+          border: none !important;
+          border-bottom: 1px solid var(--border-color) !important;
+        }
+
+        .right-col {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .right-col .horizontal-card {
+          flex: 1;
+          align-items: stretch !important;
+          align-self: stretch !important;
+        }
+
+        .horizontal-card .card-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+        }
+
+        .mirrored-grid {
+          grid-template-columns: 1fr 1.3fr;
+          margin-top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+          .home-projects-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .main-project-img {
+            min-height: 250px;
+          }
+
+          .mirrored-grid .right-col {
+            order: 2;
+            /* Ensure small cards are below main on mobile */
+          }
+
+          .mirrored-grid .main-project-card {
+            order: 1;
+            /* Ensure main card is top on mobile */
+          }
+        }
+      </style>
+      <div class="home-projects-grid">
+        <div class="card main-project-card">
+          <div class="media-wrapper main-project-img">
+            <img src="assets/3D projects/room.jpeg" alt="3D Environment" style="object-position: center;">
+          </div>
+          <div style="padding: 2.5rem;">
+            <div class="card-tags" style="margin-top: 0; margin-bottom: 1rem;">
+              <span class="tag" style="color: var(--accent-color); border-color: var(--accent-color);">BLENDER</span>
+              <span class="tag">ENVIRONMENT ART</span>
+            </div>
+            <h3 class="card-title">Gamer Bedroom</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">A stylized, pastel toned isometric 3D bedroom scene. Fully detailed with a dual-monitor gaming setup, custom PC rig, neon signage, and popular pop-culture posters and plushies, creating a vibrant and clean aesthetic.</p>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="card horizontal-card">
+            <div class="media-wrapper">
+              <img src="assets/3D projects/robo arm.jpeg" alt="Robo Arm">
+            </div>
+            <div class="card-content">
+              <span class="tag" style="margin-bottom: 1rem; display: inline-block;">BLENDER</span>
+              <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Robotic Arm</h3>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">A highly detailed, hyper-realistic 3D model of an industrial robotic arm. Designed with intricate mechanical components, weathered metallic textures, and realistic wiring to capture a gritty, functional factory aesthetic.</p>
+            </div>
+          </div>
+          <div class="card horizontal-card">
+            <div class="media-wrapper">
+              <img src="assets/graphic design/RETRO FORCE basic logo.png" alt="Retro Force Logo">
+            </div>
+            <div class="card-content">
+              <span class="tag" style="margin-bottom: 1rem; display: inline-block;">PHOTOSHOP</span>
+              <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 0.5rem;">RETRO FORCE LOGO</h3>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">Brand identity and visual design system
+                developed for a technical apparel brand.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Grid Row (Mirrored) -->
+      <div class="home-projects-grid mirrored-grid">
+        <div class="right-col">
+          <div class="card horizontal-card">
+            <div class="media-wrapper">
+              <img src="assets/3D projects/japan mask.jpeg" alt="Japanese Mask">
+            </div>
+            <div class="card-content">
+              <span class="tag" style="margin-bottom: 1rem; display: inline-block;">BLENDER</span>
+              <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Japanese Oni Mask</h3>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">High poly sculpt and retopology of a
+                traditional Japanese Oni mask for a cinematic.</p>
+            </div>
+          </div>
+          <div class="card horizontal-card">
+            <div class="media-wrapper">
+              <img src="assets/graphic design/event poster.jpg" alt="Event Poster" style="object-position: top;">
+            </div>
+            <div class="card-content">
+              <span class="tag" style="margin-bottom: 1rem; display: inline-block;">PHOTOSHOP</span>
+              <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Autumn Food Festival Poster</h3>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">Promotional Event Poster and Corporate Marketing Graphics</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card main-project-card">
+          <div class="media-wrapper main-project-img">
+            <img src="assets/3D projects/bike.jpeg" alt="Cyber Bike" style="object-position: center;">
+          </div>
+          <div style="padding: 2.5rem;">
+            <div class="card-tags" style="margin-top: 0; margin-bottom: 1rem;">
+              <span class="tag" style="color: var(--accent-color); border-color: var(--accent-color);">BLENDER</span>
+              <span class="tag">HARD SURFACE</span>
+            </div>
+            <h3 class="card-title">Cyberpunk Motorcycle</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">Concept design and hard surface modeling of a
+              futuristic hover bike. Rendered in Cycles with custom PBR materials.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <style>
+      .stats-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 6rem;
+        padding: 3rem 0;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .stat-box {
+        text-align: center;
+        flex: 1;
+      }
+
+      .stat-number {
+        font-size: clamp(3rem, 5vw, 4.5rem);
+        font-weight: 800;
+        letter-spacing: -2px;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        color: var(--text-primary);
+      }
+
+      .accent-plus {
+        color: var(--accent-color);
+        font-size: clamp(2.5rem, 4vw, 4rem);
+        margin-left: 2px;
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+      }
+
+      .stat-divider {
+        width: 1px;
+        height: 80px;
+        background-color: var(--border-color);
+      }
+
+      @media (max-width: 768px) {
+        .stats-section {
+          flex-direction: column;
+          gap: 3rem;
+        }
+
+        .stat-divider {
+          width: 80px;
+          height: 1px;
+        }
+      }
+    </style>
+    <section class="stats-section">
+      <div class="stat-box">
+        <h2 class="stat-number" data-target="50">0<span class="accent-plus">+</span></h2>
+        <span class="stat-label mono">PROJECTS</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-box">
+        <h2 class="stat-number" data-target="20">0<span class="accent-plus">+</span></h2>
+        <span class="stat-label mono">CLIENTS WORLDWIDE</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-box">
+        <h2 class="stat-number" data-target="5">0<span class="accent-plus">+</span></h2>
+        <span class="stat-label mono">YEARS EXPERIENCE</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-box">
+        <h2 class="stat-number" data-target="5">0<span class="accent-plus">+</span></h2>
+        <span class="stat-label mono">ENGINES MASTERED</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo" style="font-size: 1rem;">
+      KEWSHITH SHERON<br>
+      <span
+        style="font-size: 0.6rem; color: var(--text-secondary); font-family: var(--font-mono); display: block; margin-top: 0.5rem; font-weight: normal;">&copy;2024
+        KEWSHITH SHERON | ALL RIGHTS RESERVED</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">TERMS OF SERVICE</a>
+      <a href="#">PRIVACY ENCRYPTION</a>
+      <a href="#">SYSTEM STATUS</a>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox-modal">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Popup Image">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const modal = document.getElementById("lightbox");
+      const modalImg = document.getElementById("lightbox-img");
+      const closeBtn = document.querySelector(".lightbox-close");
+
+      // Select all work images
+      const images = document.querySelectorAll(".media-wrapper img");
+
+      images.forEach(img => {
+        img.addEventListener("click", () => {
+          modalImg.src = img.src;
+          modal.classList.add("show");
+        });
+      });
+
+      // Close modal on close button click
+      closeBtn.addEventListener("click", () => {
+        modal.classList.remove("show");
+      });
+
+      // Close modal when clicking outside the image
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("show");
+        }
+      });
+
+      // Number counter animation using IntersectionObserver
+      const stats = document.querySelectorAll('.stat-number');
+
+      const animateValue = (element, start, end, duration) => {
+        let startTimestamp = null;
+        const plusElement = element.querySelector('.accent-plus');
+        const hasPlus = plusElement !== null;
+        const plusHTML = hasPlus ? '<span class="accent-plus">+</span>' : '';
+
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const easeOutQuad = progress * (2 - progress); // Smoother deceleration
+          const currentCount = Math.floor(easeOutQuad * (end - start) + start);
+
+          element.innerHTML = currentCount + plusHTML;
+
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            element.innerHTML = end + plusHTML;
+          }
+        };
+        window.requestAnimationFrame(step);
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-target'));
+            animateValue(el, 0, target, 1000); // 1 second animation
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 }); // Trigger when 50% of element is visible
+
+      stats.forEach(stat => observer.observe(stat));
+    });
+  </script>
+</body>
+
+</html>
